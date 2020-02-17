@@ -50527,10 +50527,179 @@
 },{}],2:[function(require,module,exports){
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var $ = _interopRequireWildcard(require("three"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Box = function Box(loc, size, mat) {
+  var _this$mesh$position, _this$mesh$rotation;
+
+  _classCallCheck(this, Box);
+
+  Object.assign(this, {
+    loc: loc,
+    size: size
+  });
+  this.geo = _construct($.BoxGeometry, _toConsumableArray(size.getArr()));
+  this.mat = new $.MeshPhongMaterial(mat);
+  this.mesh = new $.Mesh(this.geo, this.mat);
+
+  (_this$mesh$position = this.mesh.position).set.apply(_this$mesh$position, _toConsumableArray(loc.getPosArr()));
+
+  (_this$mesh$rotation = this.mesh.rotation).set.apply(_this$mesh$rotation, _toConsumableArray(loc.getRotArr()));
+};
+
+var _default = Box;
+exports["default"] = _default;
+
+},{"three":1}],3:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var $ = _interopRequireWildcard(require("three"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Light = function Light(color, opacity, loc) {
+  var _this$mesh$position, _this$mesh$rotation;
+
+  _classCallCheck(this, Light);
+
+  this.mesh = new $.DirectionalLight(color, opacity);
+
+  (_this$mesh$position = this.mesh.position).set.apply(_this$mesh$position, _toConsumableArray(loc.getPosArr()));
+
+  (_this$mesh$rotation = this.mesh.rotation).set.apply(_this$mesh$rotation, _toConsumableArray(loc.getRotArr()));
+};
+
+var _default = Light;
+exports["default"] = _default;
+
+},{"three":1}],4:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Location = function Location(x, y, z, rx, ry, rz) {
+  var _this = this;
+
+  _classCallCheck(this, Location);
+
+  _defineProperty(this, "getPosArr", function () {
+    return [_this.x, _this.y, _this.z];
+  });
+
+  _defineProperty(this, "getRotArr", function () {
+    return [_this.rx, _this.ry, _this.rz];
+  });
+
+  Object.assign(this, {
+    x: x,
+    y: y,
+    z: z,
+    rx: rx,
+    ry: ry,
+    rz: rz
+  });
+};
+
+var _default = Location;
+exports["default"] = _default;
+
+},{}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Size = function Size(w, h, d) {
+  var _this = this;
+
+  _classCallCheck(this, Size);
+
+  _defineProperty(this, "getArr", function () {
+    return [_this.w, _this.h, _this.d];
+  });
+
+  Object.assign(this, {
+    w: w,
+    h: h,
+    d: d
+  });
+};
+
+var _default = Size;
+exports["default"] = _default;
+
+},{}],6:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _Light = _interopRequireDefault(require("../components/Light"));
+
+var _Location = _interopRequireDefault(require("../components/Location"));
+
+var _Env = _interopRequireDefault(require("../env/Env"));
 
 var _Camera = _interopRequireDefault(require("./Camera"));
 
@@ -50553,23 +50722,35 @@ var App = function App() {
     _this.camera.init();
 
     _this.renderer.init();
+
+    _this.scene.add(_this.env.group);
+
+    _this.scene.add(_this.lightA.mesh);
+
+    _this.scene.add(_this.lightB.mesh);
   });
 
   _defineProperty(this, "render", function () {
     _this.renderer.mesh.render(_this.scene.mesh, _this.camera.mesh);
 
+    _this.env.render();
+
     requestAnimationFrame(_this.render);
   });
 
-  this.camera = new _Camera["default"](70);
+  this.camera = new _Camera["default"](40);
   this.scene = new _Scene["default"]();
   this.renderer = new _Renderer["default"]();
+  this.env = new _Env["default"]();
+  this.lightA = new _Light["default"](0xffffff, 0.7, new _Location["default"](100, 100, 100, 0, 0, 0));
+  this.lightB = new _Light["default"](0xffffff, 0.2, new _Location["default"](-100, 100, 100, 0, 0, 0));
 };
 
-var _default = App;
+var _default = new App();
+
 exports["default"] = _default;
 
-},{"./Camera":3,"./Renderer":4,"./Scene":5}],3:[function(require,module,exports){
+},{"../components/Light":3,"../components/Location":4,"../env/Env":10,"./Camera":7,"./Renderer":8,"./Scene":9}],7:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -50597,13 +50778,13 @@ function () {
   function Camera(fov) {
     _classCallCheck(this, Camera);
 
-    this.mesh = new $.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.01, 10);
+    this.mesh = new $.PerspectiveCamera(fov, window.innerWidth / window.innerHeight, 0.01, 1000);
   }
 
   _createClass(Camera, [{
     key: "init",
     value: function init() {
-      this.mesh.position.z = 1;
+      this.mesh.position.z = 230;
     }
   }]);
 
@@ -50613,7 +50794,7 @@ function () {
 var _default = Camera;
 exports["default"] = _default;
 
-},{"three":1}],4:[function(require,module,exports){
+},{"three":1}],8:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -50660,7 +50841,7 @@ function () {
 var _default = Renderer;
 exports["default"] = _default;
 
-},{"three":1}],5:[function(require,module,exports){
+},{"three":1}],9:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -50678,41 +50859,208 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+var Scene = function Scene() {
+  var _this = this;
 
-var Scene =
-/*#__PURE__*/
-function () {
-  function Scene() {
-    _classCallCheck(this, Scene);
+  _classCallCheck(this, Scene);
 
-    this.mesh = new $.Scene();
-  }
+  _defineProperty(this, "add", function (obj) {
+    return _this.mesh.add(obj);
+  });
 
-  _createClass(Scene, [{
-    key: "add",
-    value: function add(obj) {
-      this.mesh.add(obj);
-    }
-  }]);
-
-  return Scene;
-}();
+  this.mesh = new $.Scene();
+};
 
 var _default = Scene;
 exports["default"] = _default;
 
-},{"three":1}],6:[function(require,module,exports){
+},{"three":1}],10:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var $ = _interopRequireWildcard(require("three"));
+
+var _Room = _interopRequireDefault(require("./Room"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Env =
+/*#__PURE__*/
+function () {
+  function Env() {
+    var _this = this;
+
+    _classCallCheck(this, Env);
+
+    _defineProperty(this, "add", function (obj) {
+      return _this.group.add(obj);
+    });
+
+    this.group = new $.Group();
+    this.room = new _Room["default"]();
+    this.init();
+  }
+
+  _createClass(Env, [{
+    key: "init",
+    value: function init() {
+      this.add(this.room.group);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      this.room.render();
+    }
+  }]);
+
+  return Env;
+}();
+
+var _default = Env;
+exports["default"] = _default;
+
+},{"./Room":11,"three":1}],11:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var $ = _interopRequireWildcard(require("three"));
+
+var _Box = _interopRequireDefault(require("../components/Box"));
+
+var _Location = _interopRequireDefault(require("../components/Location"));
+
+var _Size = _interopRequireDefault(require("../components/Size"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var Room =
+/*#__PURE__*/
+function () {
+  function Room(size) {
+    var _this = this;
+
+    _classCallCheck(this, Room);
+
+    _defineProperty(this, "generate", function () {
+      _this.walls[0] = new _Box["default"](new _Location["default"](-18, 0, 0, 0, .78, 0), new _Size["default"](50, 55, 2), {
+        color: 0x00ff00,
+        wireframe: false
+      });
+      _this.walls[1] = new _Box["default"](new _Location["default"](18, 0, 0, 0, 2.35, 0), new _Size["default"](50, 55, 2), {
+        color: 0x00ff00,
+        wireframe: false
+      });
+      _this.walls[2] = new _Box["default"](new _Location["default"](0, -28, 18, 1.57, 0, .78), new _Size["default"](50, 50, 2), {
+        color: 0xffffff,
+        wireframe: false
+      });
+      _this.couch = new _Box["default"](new _Location["default"](0, -18, 18, 1.57, 0, .78), new _Size["default"](10, 10, 10), {
+        color: 0x00ff00,
+        wireframe: false
+      });
+    });
+
+    this.group = new $.Group();
+    this.walls = [];
+    this.couch = null;
+    this.fall = false;
+    this.init();
+  }
+
+  _createClass(Room, [{
+    key: "init",
+    value: function init() {
+      this.generate();
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.walls[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var wall = _step.value;
+          this.group.add(wall.mesh);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+            _iterator["return"]();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      this.group.add(this.couch.mesh);
+      this.group.rotation.x = 0;
+      this.group.position.y = 0;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.couch.mesh.position.y > 0) this.fall = true;
+      if (this.couch.mesh.position.y < -20) this.fall = false;
+      this.fall ? this.couch.mesh.position.y -= 0.5 : this.couch.mesh.position.y += 0.5;
+    }
+  }]);
+
+  return Room;
+}();
+
+var _default = Room;
+exports["default"] = _default;
+
+},{"../components/Box":2,"../components/Location":4,"../components/Size":5,"three":1}],12:[function(require,module,exports){
 "use strict";
 
 var _App = _interopRequireDefault(require("./core/App"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var app = new _App["default"]();
-app.init();
-app.render();
+_App["default"].init();
 
-},{"./core/App":2}]},{},[6]);
+_App["default"].render();
+
+},{"./core/App":6}]},{},[12]);
