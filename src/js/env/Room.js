@@ -1,36 +1,46 @@
-import * as $ from "three";
-import Box from "../components/Box";
-import Location from "../components/Location";
-import Size from "../components/Size";
+import collada from "../components/Collada";
 
 class Room {
   constructor(size) {
-    this.group = new $.Group();
-    this.walls = [];
-    this.couch = null;
-    this.fall = false;
     this.init();
+    this.couch1 = null;
+    this.couch2 = null;
+    this.couch3 = null;
   }
 
   init() {
-    this.generate();
-    for (let wall of this.walls) this.group.add(wall.mesh);
-    this.group.add(this.couch.mesh);
-    this.group.rotation.x = 0;
-    this.group.position.y = 0;
+    collada.load("img/couch1.dae", dae => {
+      dae.scale.x = dae.scale.y = dae.scale.z = 1;
+      dae.position.x = 10000;
+      dae.rotation.y = -1.57;
+      dae.position.z = -100;
+      this.couch1 = dae;
+    });
+    collada.load("img/couch2.dae", dae => {
+      dae.scale.x = dae.scale.y = dae.scale.z = 1;
+      dae.position.x = 10000;
+      dae.rotation.y = -1.57;
+      dae.position.z = -100;
+      this.couch2 = dae;
+    });
+    collada.load("img/couch2.dae", dae => {
+      dae.scale.x = dae.scale.y = dae.scale.z = 1;
+      dae.position.x = 10000;
+      dae.rotation.y = -1.57;
+      dae.position.z = -100;
+      this.couch3 = dae;
+    });
   }
 
   render() {
-    if (this.couch.mesh.position.y > 0) this.fall = true;
-    if (this.couch.mesh.position.y < -20) this.fall = false;
-    this.fall ? this.couch.mesh.position.y -= 0.5 : this.couch.mesh.position.y += 0.5;
   }
 
-  generate = () => {
-    this.walls[0] = new Box(new Location(-18, 0, 0, 0, .78, 0), new Size(50, 55, 2), {color: 0x00ff00, wireframe: false});
-    this.walls[1] = new Box(new Location(18, 0, 0, 0, 2.35, 0), new Size(50, 55, 2), {color: 0x00ff00, wireframe: false});
-    this.walls[2] = new Box(new Location(0, -28, 18, 1.57, 0, .78), new Size(50, 50, 2), {color: 0xffffff, wireframe: false});
-    this.couch = new Box(new Location(0, -18, 18, 1.57, 0, .78), new Size(10, 10, 10), {color: 0x00ff00, wireframe: false});
+  toggleCouch = which => {
+    const couch = `couch${which}`;
+    this.couch1.position.x = 10000;
+    this.couch2.position.x = 10000;
+    this.couch3.position.x = 10000;
+    this[couch].position.x = 0;
   };
 }
 

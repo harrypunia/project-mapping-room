@@ -12,6 +12,10 @@ class Env {
 
   init() {
     this.add(this.room.group);
+    window.addEventListener("click", () => {
+      const rng = Math.ceil(Math.random() * 2);
+      this.room.toggleCouch(rng);
+    });
   }
 
   render() {
